@@ -3,8 +3,8 @@ version: 2.1
 orbs: 
   slack: circleci/slack@4.10.1
 
-# commands:
-notify_while_failure:
+commands:
+  notify_while_failure:
     steps:
       - slack/notify:
           event: fail
