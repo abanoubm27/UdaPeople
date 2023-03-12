@@ -11,12 +11,14 @@ commands:
           event: fail
           channel: $SLACK_DEFAULT_CHANNEL
           template: basic_fail_1
+
   install-awscli:
     description: install awscli
     steps:
       - run:
           name: install awscli
           command: |
+            sudo apt-get install unzip
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscli_package.zip"
             unzip awscli_package.zip
             sudo ./aws/install
