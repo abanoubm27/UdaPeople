@@ -173,7 +173,7 @@ jobs:
       steps:
         - checkout
         - install-awscli
-         - run:
+        - run:
             name: install tar and gzip
             command: |
               yum -y install tar gzip
