@@ -2,7 +2,7 @@ set NODE_ENV=production
 set VERSION=1
 set TYPEORM_CONNECTION=postgres
 set TYPEORM_CONNECTION_DIR=./migrations
-set TYPEORM_ENTITIES=./modules/domain/**/*.entity.ts
+set TYPEORM_ENTITIES=./modules/domain/**/*.entity.js
 set TYPEORM_MIGRATIONS='./migrations/*{.ts,.js}'
 
 
