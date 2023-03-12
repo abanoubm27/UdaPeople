@@ -16,15 +16,15 @@ commands:
 
 
   install_Ansible:
-      Description: Install Ansible
-      steps:
-        -run:
-          name: Install Ansible
-          Command: |
-              sudo apt update
-              sudo apt install software-properties-common
-              sudo add-apt-repository --yes --update ppa:ansible/ansible
-              sudo apt install ansible
+    Description: Install Ansible
+    steps:
+      -run:
+        name: Install Ansible
+        Command: |
+            sudo apt update
+            sudo apt install software-properties-common
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible
 
 
 
