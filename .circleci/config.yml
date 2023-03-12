@@ -5,12 +5,31 @@ orbs:
 
 commands:
   
-# notify_while_failure:
-#     steps:
-#       - slack/notify:
-#           event: fail
-#           channel: $SLACK_DEFAULT_CHANNEL
-#           template: basic_fail_1
+  notify_when_fail:
+    steps:
+      - slack/notify:
+          event: fail
+          channel: $SLACK_DEFAULT_CHANNEL
+          template: basic_fail_1
+  install-awscli:
+    description: install awscli
+    steps:
+      - run:
+          name: install awscli
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscli_package.zip"
+            unzip awscli_package.zip
+            sudo ./aws/install
+  install-ansible:
+    description: install ansible
+    steps:
+      - run:
+          name: install ansible
+          command: |
+            sudo apt update 
+            sudo apt install software-properties-common -y
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible -y
 
 
 
@@ -62,7 +81,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-      - notify_while_failure
+      - notify_when_fail
 
 
   build-backend:
@@ -81,7 +100,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
-      - notify_while_failure
+      - notify_when_fail
 
   test-frontend:
     docker:
@@ -96,7 +115,7 @@ jobs:
             cd frontend
             npm install
             npm test
-      - notify_while_failure
+      - notify_when_fail
      
                 
   test-backend:
@@ -112,7 +131,7 @@ jobs:
              cd backend
              npm install
              npm test
-      - notify_while_failure
+      - notify_when_fail
             
   scan-frontend:
     docker:
@@ -129,7 +148,7 @@ jobs:
              npm audit fix --force --audit-level=critical
              npm audit fix --audit-level=critical --force
              npm audit --audit-level=critical
-      - notify_while_failure
+      - notify_when_fail
 
   scan-backend:
     docker:
@@ -146,7 +165,7 @@ jobs:
              npm audit fix --audit-level=critical --force
              npm audit fix --audit-level=critical --force
              npm audit --audit-level=critical
-      - notify_while_failure
+      - notify_when_fail
 
   deploy-infrastructure:
       docker:
